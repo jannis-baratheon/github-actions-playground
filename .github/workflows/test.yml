@@ -18,7 +18,8 @@ jobs:
       - uses: octokit/request-action@v2.x
         id: get_artifacts
         with:
-          route: GET /repos/${{ github.repository_owner }}/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
+            route: GET /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: "echo Artifacts: ${{ steps.get_artifacts.outputs.data }}"
+      - run: |
+        echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"
