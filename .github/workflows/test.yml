@@ -8,6 +8,8 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - name: checkout
+        uses: actions/checkout@v3
       - name: Create HTML test report artifact
         uses: actions/upload-artifact@v3
         with:
