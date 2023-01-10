@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    name: Build
+    name: Test job
     runs-on: ubuntu-latest
     steps:
       - name: checkout
@@ -15,3 +15,11 @@ jobs:
         with:
           name: test-artifact
           path: testfile.txt
+      - uses: octokit/request-action@v2.x
+        id: get_artifacts
+        with:
+          route: GET /repos/{owner}/{repo}/actions/runs/{run_id/artifacts
+          owner: ${{ github.repository_owner }}
+          repo: ${{ github.repository }}
+          run_id: ${{ github.run_id }}
+      - run: "echo Artifacts: ${{ steps.get_artifacts.outputs.data }}"
