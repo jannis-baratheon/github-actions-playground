@@ -1,0 +1,15 @@
+name: Test workflow
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create HTML test report artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-artifact
+          path: testfile.txt
