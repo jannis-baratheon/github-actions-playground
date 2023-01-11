@@ -22,4 +22,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
-      - run: "./gradlew cV | sed -n -e 's/^Project version: \(.*\)/\1/p'"
+      - run: |
+        echo "publish_version=$(./gradlew cV | sed -n -e 's/^Project version: \(.*\)/\1/p')" >> $GITHUB_OUTPUT
