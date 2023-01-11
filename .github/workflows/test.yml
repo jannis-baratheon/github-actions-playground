@@ -23,5 +23,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
       - run: |
-        chmod +x ".github/script/print_project_version.sh"
-        echo "publish_version=`.github/script/print_project_version.sh`" >> $GITHUB_OUTPUT
+          chmod +x ".github/script/print_project_version.sh"
+          echo "publish_version=`.github/script/print_project_version.sh`" >> $GITHUB_OUTPUT
