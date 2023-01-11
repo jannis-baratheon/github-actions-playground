@@ -23,4 +23,4 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
       - run: |
-        echo `./gradlew cV | sed -n -e 's/^Project version: \(.*\)/\1/p'`
+        ./gradlew cV | sed -n -e 's/^Project version: \(.*\)/\1/p'
