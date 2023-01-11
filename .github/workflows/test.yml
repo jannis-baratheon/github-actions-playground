@@ -22,4 +22,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
-      - run: echo "publish_version=`print_project_version.sh`" >> $GITHUB_OUTPUT
+      - run: echo "publish_version=`./print_project_version.sh`" >> $GITHUB_OUTPUT
