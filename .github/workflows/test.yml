@@ -13,6 +13,8 @@ jobs:
     name: Test job
     runs-on: ubuntu-latest
     steps:
+      - name: github repository
+        run: echo "${{ github.repository }}"
       - name: checkout
         uses: actions/checkout@v3
       - name: Create HTML test report artifact
