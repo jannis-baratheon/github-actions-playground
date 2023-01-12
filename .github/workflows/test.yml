@@ -36,7 +36,13 @@ jobs:
         uses: gradle/gradle-build-action@v2
       - id: get_version
         run: |
-          echo "publish_version=`./gradlew cV | sed -n -e 's/^Project version: \(.*\)/\1/p'`" >> $GITHUB_OUTPUT
+          echo "publish_version=`./gradlew -q -Prelease.quiet cV`" >> $GITHUB_OUTPUT
       - name: Place report URL in the summary
         run: |
           echo "Publish version is: <${{ steps.get_version.outputs.publish_version }}>" >> $GITHUB_STEP_SUMMARY
+      - name: test multiline env
+        run: |
+          MULTI_LINES_TEXT="this is line one \n
+                            this is line two \n
+                            this is line three \n"
+          echo "MULTI_LINES_TEXT_ENV_VAR=$MULTI_LINES_TEXT" >> $GITHUB_ENV
