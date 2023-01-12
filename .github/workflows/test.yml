@@ -30,7 +30,6 @@ jobs:
           route: GET /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: echo 'aaaa' >> $GITHUB_STEP_SUMMARY
       - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
       - name: Setup Gradle
         uses: gradle/gradle-build-action@v2
