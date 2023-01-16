@@ -14,39 +14,22 @@ jobs:
   build:
     name: Test job
     runs-on: ubuntu-latest
+    outputs:
+      output1: {{ steps.generate_output.outputs.matrix_version }}
+    strategy:
+      matrix:
+        version: [10, 12, 14]
     steps:
-      - name: github repository
-        run: echo "${{ github.repository }}"
-      - name: checkout
-        uses: actions/checkout@v3
-      - name: Create HTML test report artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-artifact
-          path: testfile.txt
-      - uses: octokit/request-action@v2.x
-        id: get_artifacts
-        with:
-          route: GET /repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/artifacts
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - run: 'echo "Artifacts: ${{ steps.get_artifacts.outputs.data }}"'
-      - name: Setup Gradle
-        uses: gradle/gradle-build-action@v2
-      - id: get_version
+      - run: |
+        echo 'Matrix version: ${{ matrix.version }}' >> $GITHUB_STEP_SUMMARY
+      - id: generate_output
         run: |
-          echo "publish_version=`./gradlew -q -Prelease.quiet cV`" >> $GITHUB_OUTPUT
-      - name: Place report URL in the summary
+          echo 'matrix_version=${{ matrix.version }}' >> $GITHUB_OUTPUTS
+
+  postbuild:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print job output
         run: |
-          echo "Publish version is: <${{ steps.get_version.outputs.publish_version }}>" >> $GITHUB_STEP_SUMMARY
-      - name: test multiline env
-        run: |
-          MULTI_LINES_TEXT="this is line one \n
-                            this is line two \n
-                            this is line three \n"
-          echo '$MULTI_LINES_TEXT_VAR<<EOF' >> $GITHUB_ENV
-          echo $MULTI_LINES_TEXT >> $GITHUB_ENV 
-          echo "EOF" >> $GITHUB_ENV
-      - name: echo var
-        run: |
-          echo "Variable is ${{ env.MULTI_LINES_TEXT_VAR }}"
+          echo "${{ needs.build.outputs.output1 }}"
