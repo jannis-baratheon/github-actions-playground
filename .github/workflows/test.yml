@@ -20,8 +20,9 @@ jobs:
       matrix:
         version: [10, 12, 14]
     steps:
-      - run: |
-        echo 'Matrix version: ${{ matrix.version }}' >> $GITHUB_STEP_SUMMARY
+      - name: Save matrix version in step summary
+        run: |
+          echo 'Matrix version: ${{ matrix.version }}' >> $GITHUB_STEP_SUMMARY
       - id: generate_output
         run: |
           echo 'matrix_version=${{ matrix.version }}' >> $GITHUB_OUTPUTS
