@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "matrix_version=${{ matrix.version }}" >> "$GITHUB_OUTPUTS"
       - id: create_artifact
-        run: echo "${{ matrix.version }}" >> version.txt
+        run: echo "${{ matrix.version }}" > version.txt
       - id: upload_artifact
         uses: actions/upload-artifact@v3
         with:
