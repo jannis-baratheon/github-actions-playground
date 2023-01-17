@@ -16,7 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        version: [10, 12, 14]
+        version: [ 10, 12, 14 ]
     steps:
       - name: Save matrix version in step summary
         run: |
@@ -26,5 +26,5 @@ jobs:
       - id: upload_artifact
         uses: actions/upload-artifact@v3
         with:
-          name: test-artifact
+          name: test-artifact-${{ matrix.version }}
           path: version.txt
