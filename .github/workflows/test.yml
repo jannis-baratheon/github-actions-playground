@@ -28,3 +28,13 @@ jobs:
         with:
           name: test-artifact-${{ matrix.version }}
           path: version.txt
+
+  process_artifacts:
+    runs-on: ubuntu-latest
+    steps:
+      - id: download_artifacts
+        uses: actions/download-artifact
+        with:
+          name: test-artifact-*
+      - id: list artifacts
+        run: ls -la
