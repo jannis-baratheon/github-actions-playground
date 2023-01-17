@@ -33,7 +33,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: download_artifacts
-        uses: actions/download-artifact
+        uses: actions/download-artifact@v3
         with:
           name: test-artifact-*
       - id: list artifacts
