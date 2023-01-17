@@ -36,5 +36,5 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: test-artifact-*
-      - id: list artifacts
+      - name: list artifacts
         run: ls -la
