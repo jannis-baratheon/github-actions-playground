@@ -14,8 +14,6 @@ jobs:
   build:
     name: Test job
     runs-on: ubuntu-latest
-    outputs:
-      output1: {{ steps.generate_output.outputs.matrix_version }}
     strategy:
       matrix:
         version: [10, 12, 14]
@@ -26,11 +24,10 @@ jobs:
       - id: generate_output
         run: |
           echo 'matrix_version=${{ matrix.version }}' >> $GITHUB_OUTPUTS
-
-  postbuild:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print job output
-        run: |
-          echo "${{ needs.build.outputs.output1 }}"
+      - id: create_artifact
+        run: echo ${{ matrix.version }} >> version.txt
+      - id: upload_artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: test-artifact
+          path: version.txt
