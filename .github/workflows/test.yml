@@ -18,7 +18,7 @@ jobs:
       - name: Upload
         uses: actions/upload-artifact@v2
         with:
-          name: Event File
+          name: event_file
           path: ${{ github.event_path }}
 
   test:
