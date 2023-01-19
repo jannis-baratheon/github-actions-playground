@@ -44,11 +44,11 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: junit-html-test-report
-          path: build/reports/tests/test
+          path: lib/build/reports/tests/test
       - name: Create JUnit XML test report artifact
         # don't run this step only if workflow was cancelled
         if: ${{ success() || failure() }}
         uses: actions/upload-artifact@v3
         with:
           name: junit-xml-test-report
-          path: build/test-results/test
+          path: lib/build/test-results/test
