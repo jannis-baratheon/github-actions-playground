@@ -8,3 +8,4 @@
  */
 
 rootProject.name = 'github-actions-playground'
+include('lib')
