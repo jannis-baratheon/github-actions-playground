@@ -23,7 +23,6 @@ jobs:
 
   test:
     name: Run tests
-    needs: compile
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
