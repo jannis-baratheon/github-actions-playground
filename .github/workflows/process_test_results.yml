@@ -15,16 +15,12 @@ jobs:
 
     permissions:
       checks: write
-
       # needed unless run with comment_mode: off
       pull-requests: write
-
       # only needed for private repository
       contents: read
-
       # only needed for private repository
       issues: read
-
       # required by download step to access artifacts API
       actions: read
 
@@ -45,6 +41,8 @@ jobs:
               unzip -d "$name" "$name.zip"
             fi
           done
+          
+          find .
 
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
