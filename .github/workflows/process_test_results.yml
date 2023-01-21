@@ -36,7 +36,7 @@ jobs:
           gh api --paginate "$artifacts_url" -q '.artifacts[] | [.name, .archive_download_url] | @tsv' | while read artifact
           do
             IFS=$'\t' read name url <<< "$artifact"
-            if [ $name == 'junit-xml-test-report' ] || [$name == 'event-file']; then
+            if [ "$name" == 'junit-xml-test-report' ] || [ "$name" == 'event-file' ]; then
               gh api $url > "$name.zip"
               unzip -d "$name" "$name.zip"
             fi
